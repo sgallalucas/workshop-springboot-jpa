@@ -9,7 +9,7 @@ import java.util.Objects;
 @Table(name = "tb_user") // "User" é uma palavra reservada no banco H2, essa anotação serve para renomear a tabela.
 public class User implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // especifica que a primary key é auto incrementável no banco de dados.
     private Long id;
     private String name;
     private String email;

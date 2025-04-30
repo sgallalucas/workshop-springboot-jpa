@@ -1,4 +1,4 @@
-package com.lucas.project.resources;
+package com.lucas.project.controllers;
 
 import com.lucas.project.entities.User;
 import org.springframework.http.ResponseEntity;

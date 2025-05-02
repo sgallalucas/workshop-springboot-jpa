@@ -3,11 +3,14 @@ package com.lucas.project.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "tb_user") // "User" é uma palavra reservada no banco H2, essa anotação serve para renomear a tabela.
 public class User implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // especifica que a primary key é auto incrementável no banco de dados.
     private Long id;
@@ -15,6 +18,9 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>(); // atributo de associação
 
     public User(){
     }
@@ -65,6 +71,10 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Order> getOrder(){
+        return orders;
     }
 
     @Override

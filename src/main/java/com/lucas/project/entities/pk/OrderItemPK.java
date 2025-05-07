@@ -13,7 +13,7 @@ import java.util.Objects;
 // @Embedded: é usada para incorporar um tipo em outra entidade.
 
 @Embeddable
-public class OrderItemPK implements Serializable {
+public class OrderItemPK implements Serializable { // classe auxiliar para lidar com chaves primárias compostas.
 
     @ManyToOne
     @JoinColumn(name = "order_id")

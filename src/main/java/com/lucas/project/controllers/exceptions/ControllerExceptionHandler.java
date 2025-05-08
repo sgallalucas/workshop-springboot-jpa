@@ -1,5 +1,6 @@
 package com.lucas.project.controllers.exceptions;
 
+import com.lucas.project.services.exceptions.DatabaseException;
 import com.lucas.project.services.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,14 @@ public class ControllerExceptionHandler {
     public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request){
         String error = "Resource not found";
         HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError er = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(er);
+    }
+
+    @ExceptionHandler(DatabaseException.class) // intercepta as requisições para capturar exceções
+    public ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request){
+        String error = "Database error";
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError er = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(er);
     }
